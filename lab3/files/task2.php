@@ -7,7 +7,7 @@
     <title>Lab 3, File Task 2</title>
     <?php
     // Lab 3, File Task 2
-    
+
     $words1 = file_get_contents("./task2files/first.txt");
     $words2 = file_get_contents("./task2files/second.txt");
 
@@ -52,13 +52,22 @@
 
     function countValues($words1, $words2): void
     {
-        $countValues = array_count_values(array_merge($words1, $words2));
-        foreach ($countValues as $key => $value) {
-            if ($value < 3) {
-                unset($countValues[$key]);
+        $countFirstFile = array_count_values($words1);
+        $countSecondFile = array_count_values($words2);
+
+        foreach ($countFirstFile as $key => $value) {
+            if ($value < 3 || (isset($countSecondFile[$key]) && $countSecondFile[$key] < 3)) {
+                unset($countFirstFile[$key]);
             }
         }
-        file_put_contents("./task2files/countValues.txt", implode(" ", array_keys($countValues)));
+
+        // foreach ($countValues as $key => $value) {
+        //     if ($value < 3) {
+        //         unset($countValues[$key]);
+        //     }
+        // }
+        
+        file_put_contents("./task2files/countValues.txt", implode(" ", array_keys($countFirstFile)));
     }
 
     function GetFileContents($path, $separator): array
@@ -136,7 +145,7 @@
         }
 
         sort($files); // встановити заново ключі
-        
+
         for ($i = 0; $i < count($files); $i++) {
             $bufWords = GetFileContents("./task2files/" . $files[$i], " ");
             PrintContent($bufWords, $files[$i]);

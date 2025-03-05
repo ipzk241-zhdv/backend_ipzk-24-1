@@ -8,17 +8,18 @@
 
     <?php
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
-        if ($_FILES['userPhoto']['error'] != 4) {
-            $isPhoto = true;
-            $photo = $_FILES['userPhoto']['tmp_name'];
-            $i = uniqid(); // унікальний ідентифікатор для збереження файлу
-            do {
-                $path = "./photos/$i.png"; // майбутній шлях, який буде перевірятися чи вже зайнятий
-                $i = uniqid(); // підготовка нового ідентифікатору у разі якщо поточний зайнятий
-                // можливо не потрібна така перевірка, якщо ж uniqid використовує
-                // у паттерні створення ідентифікатору поточний час
-            } while (is_file($path));
-            move_uploaded_file($photo, $path); // зберігає завантажений файл з POST відправленний через HTTP
+        if (!empty($_FILES['userPhoto']['name'][0])) { // Перевіряємо, чи були завантажені файли
+            foreach ($_FILES['userPhoto']['tmp_name'] as $key => $tmp_name) {
+                if ($_FILES['userPhoto']['error'][$key] == 0) { // Якщо немає помилок
+                    $i = uniqid();
+                    do {
+                        $path = "./photos/$i.png";
+                        $i = uniqid();
+                    } while (is_file($path));
+
+                    move_uploaded_file($tmp_name, $path);
+                }
+            }
         }
     }
 
@@ -40,6 +41,7 @@
         .fw {
             flex-wrap: wrap;
         }
+
         img {
             margin-top: 25px;
             width: 15%;
@@ -53,7 +55,7 @@
         <table>
             <tr>
                 <td>Фотографія:</td>
-                <td><input type="file" accept="image/png" name="userPhoto" id="userPhoto" multiple></td>
+                <td><input type="file" accept="image/png" name="userPhoto[]" id="userPhoto" multiple></td>
             </tr>
             <tr>
                 <td></td>

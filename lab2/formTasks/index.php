@@ -14,7 +14,6 @@
 
 <?php
 session_start();
-
 $isLanguage = false;
 if ($_SERVER['REQUEST_METHOD'] === "GET") {
     if (isset($_GET["lang"])) {
