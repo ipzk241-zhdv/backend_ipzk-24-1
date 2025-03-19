@@ -11,7 +11,7 @@
     
     $error = false;
     $deleted = -1;
-    $dsn = "mysql:host=localhost;dbname=lab5;charset=utf8";
+    $dsn = "mysql:host=localhost;dbname=company_db;charset=utf8";
     $table = "employees";
     try {
         $pdo = new PDO($dsn, 'homeuser', '');
@@ -122,6 +122,9 @@
             <p>Продукт з номером id - <?= $deleted ?> було видалено.</p>
         <?php endif; ?>
     <?php endif; ?>
+    <?php
+    include_once("./statistics.php");
+    ?>
 </body>
 
 </html>

@@ -13,7 +13,7 @@
     $table = "employees";
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-        $dsn = "mysql:host=localhost;dbname=lab5;charset=utf8";
+        $dsn = "mysql:host=localhost;dbname=company_db;charset=utf8";
         try {
             $pdo = new PDO($dsn, 'homeuser', '');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
