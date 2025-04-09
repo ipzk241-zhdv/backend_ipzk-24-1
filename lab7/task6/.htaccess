@@ -1,0 +1,5 @@
+RewriteEngine On
+
+# Перенаправляємо всі запити на traffic_logger.php
+RewriteCond %{REQUEST_URI} !^/lab7/task6/traffic_logger.php$
+RewriteRule ^(.*)$ /lab7/task6/traffic_logger.php [L]
