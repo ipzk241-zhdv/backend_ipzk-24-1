@@ -12,12 +12,7 @@ var_dump($redirects[$requestedPath]);
 
 if (isset($redirects[$requestedPath])) {
     $target = $redirects[$requestedPath];
-    if ($target === '/404') {
-        http_response_code(404);
-        echo "<h1>404 - Сторінку не знайдено</h1><p>Ця сторінка більше не доступна.</p>";
-    } else {
-        header("Location: $target", true, 301);
-    }
+    header("Location: $target", true, 301);
 } else {
     http_response_code(200);
     echo "<h1>Головна або довільна сторінка</h1><p>Немає правила для <code>$requestedPath</code>.</p>";

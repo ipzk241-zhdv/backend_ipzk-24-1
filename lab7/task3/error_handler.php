@@ -66,7 +66,7 @@ HTML;
 
 
 echo $undefinedVariable; // Warning
-// trigger_error("Користувацька помилка", E_USER_WARNING);
+trigger_error("Користувацька помилка", E_USER_WARNING);
 // require('non_existing_file.php'); // Fatal
 
 

@@ -1,4 +1,4 @@
 {
-    "/lab7/task4/old-page": "/lab7/task4/new-page.php",
-    "/lab7/task4/deprecated": "/404"
+    "/lab7/task4/old-page.php": "/lab7/task4/new-page.php",
+    "/lab7/task4/deprecated": "/lab7/task4/404.php"
 }
